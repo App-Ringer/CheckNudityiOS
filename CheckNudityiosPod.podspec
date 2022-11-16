@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
     s.name             = "CheckNudityiosPod"
-    s.version          = "0.1.32"
+    s.version          = "0.1.0"
     s.summary          = 'Check image nudity'
     s.license          = 'MIT'
     s.author           = {'Ajay' => 'ajay@appringer.com'}
 
-    s.source           = { :git => 'https://github.com/arhirapara76/CheckNudityPod.git', :tag => "#{s.version}" }
+    s.source           = { :git => 'https://github.com/App-Ringer/CheckNudityiOS.git', :tag => "#{s.version}" }
 
-    s.homepage = "https://github.com/arhirapara76/CheckNudityPod"
+    s.homepage = "https://github.com/App-Ringer/CheckNudityiOS"
 
     s.ios.deployment_target = '13.2'
     s.requires_arc = true
