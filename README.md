@@ -27,7 +27,7 @@ NSFW = Not Safe for work
 
 ```
 
-If you have image singla/multiple - Pass image(s) to below mentioned method: 
+If you have image singla/multiple images - Pass image(s) to below mentioned method: 
 ```
    NudityModel.checkNudity(with: [Your-Image-Array]) { nsfwValue, sfwValue in
      print("nsfwValue: ", nsfwValue)
