@@ -18,20 +18,18 @@ pod 'CheckNudityPod'
 
 ## Usage
 
-This 'Nudity' shows float value from 0 to 100.
+This 'CheckNudityPod' returns you a float value from 0 to 100 which tells you whether the image/video is safe for work or not.
 
-Step - Pass image to NudityModel's shared object
-
+Notation: 
 ```
-
 SFW = Safe for work
 NSFW = Not Safe for work
 
 ```
 
+If you have image singla/multiple - Pass image(s) to below mentioned method: 
 ```
    NudityModel.checkNudity(with: [Your-Image-Array]) { nsfwValue, sfwValue in
-          
      print("nsfwValue: ", nsfwValue)
      print("nsfwValue: ", sfwValue)
   }
@@ -39,12 +37,9 @@ NSFW = Not Safe for work
 ```
 
 
-Step - Pass Local Video String Url to NudityModel's shared object
-
-
+If you have video in your local - Pass Video Url in string format to below mentioned method:
 ```
   NudityModel.checkLocalVideoUrlNudity(with: YourLocalVideoStringUrl, securityLevel: .low) { nsfwValue, sfwValue in
-        
         print("nsfwValue: ", nsfwValue)
         print("nsfwValue: ", sfwValue)
   }
@@ -57,7 +52,7 @@ Total 3 security level High, Medium & Low.
 
 | High | Medium | Low |
 | --- | --- | --- |
-| Take Screenshot 1 Second. | Take Screenshot 2 Second. | Take Screenshot 4 Second. |
+| Frame captured with 1 Second interval | Frame captured with 2 Second interval | Frame captured with 4 Second interval |
 
 
 ## License
