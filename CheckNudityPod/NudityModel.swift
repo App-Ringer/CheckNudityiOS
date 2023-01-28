@@ -22,6 +22,9 @@ public class NudityModel {
     public class func checkNudity(with imageArray: [UIImage], completion: MFNudity.CompletionHandlerImageValue) {
         var nsfwConfidence : String? = "0"
         var safwConfidence : String? = "0"
+        var arrSafvalue = [Double]()
+        var arrNsafvalue = [Double]()
+        
         if !imageArray.isEmpty {
             if imageArray.count == 1 {
                 if let image = imageArray.first {
@@ -47,19 +50,29 @@ public class NudityModel {
                             safeValue += safVale ?? 0.0
                             nsafeValue += nsafValue ?? 0.0
                             imageCount += 1
+                            arrSafvalue.append(safVale ?? 0)
+                            arrNsafvalue.append(nsafValue ?? 0)
                         } else {
                             print("error: ", error)
                         }
                     }
                 }
+                
                 if imageCount == imageArray.count {
-                    safeValue = safeValue / Double(imageArray.count)
-                    nsafeValue = nsafeValue / Double(imageArray.count)
-                    let convertedSaf = String(format: "%.2f", safeValue)
-                    let convertedNsaf = String(format: "%.2f", nsafeValue)
-                    nsfwConfidence = convertedNsaf
-                    safwConfidence = convertedSaf
-                    completion(nsfwConfidence, safwConfidence)
+                    if let minNsafeValue = arrNsafvalue.max(), minNsafeValue > 85 {
+                        let safValue = 100.0 - minNsafeValue
+                        let convertedNsaf = String(format: "%.2f", minNsafeValue)
+                        let convertedSaf = String(format: "%.2f", safValue)
+                        completion(convertedNsaf, convertedSaf)
+                    } else {
+                        safeValue = safeValue / Double(imageArray.count)
+                        nsafeValue = nsafeValue / Double(imageArray.count)
+                        let convertedSaf = String(format: "%.2f", safeValue)
+                        let convertedNsaf = String(format: "%.2f", nsafeValue)
+                        nsfwConfidence = convertedNsaf
+                        safwConfidence = convertedSaf
+                        completion(nsfwConfidence, safwConfidence)
+                    }
                 }
             }
         }
@@ -112,7 +125,7 @@ extension NudityModel {
         }
         NudityModel.checkNudity(with: imageArray, completion: completion)
     }
-
+    
     private func takeVideoSnapShot() -> UIImage? {
         let playerItem = AVPlayerItem(url: localVideoUrl)
         let asset: AVURLAsset? = (playerItem.asset as? AVURLAsset)
